@@ -22,6 +22,14 @@
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                 Dashboard
             </a>
+            <a href="#" class="nav-item" data-target="equity">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path></svg>
+                Equity & MFs
+            </a>
+            <a href="#" class="nav-item" data-target="debt">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Debt & Fixed
+            </a>
             <a href="#" class="nav-item" data-target="crypto">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                 Crypto & SIPs
@@ -40,13 +48,21 @@
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
             Home
         </a>
+        <a href="#" class="bnav-item" data-target="equity">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4"></path></svg>
+            Equity
+        </a>
+        <a href="#" class="bnav-item" data-target="debt">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8V7m0 1v8"></path></svg>
+            Debt
+        </a>
         <a href="#" class="bnav-item" data-target="crypto">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
             Crypto
         </a>
         <a href="#" class="bnav-item" data-target="ai">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
-            AI Gen
+            AI
         </a>
     </nav>
 
@@ -57,7 +73,7 @@
         <div id="page-dashboard" class="page active">
             <div class="page-header">
                 <h1 class="page-title">Portfolio Overview</h1>
-                <p class="page-subtitle">Welcome back! Here's how your investments are performing against the market.</p>
+                <p class="page-subtitle">Welcome back! Here is your overall tracker across all instruments.</p>
             </div>
 
             <div class="grid-3 mb-4" style="margin-bottom: 24px;">
@@ -80,6 +96,91 @@
                 <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">Comparing simulated growth over the last 12 months.</p>
                 <div class="chart-container">
                     <canvas id="compareChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- EQUITY SECTION -->
+        <div id="page-equity" class="page">
+            <div class="page-header">
+                <h1 class="page-title">Equity & Mutual Funds</h1>
+                <p class="page-subtitle">Track your domestic stocks, MFs, and US ETFs.</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card glass-card">
+                    <h3 style="margin-bottom: 16px;">Add Equity Holding</h3>
+                    <div class="form-group">
+                        <label class="form-label">Instrument Type</label>
+                        <select class="form-control" id="eqType">
+                            <option value="Mutual Fund">Mutual Fund</option>
+                            <option value="Indian Stock">Indian Stock</option>
+                            <option value="US ETF">US ETF</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Asset Name / Ticker</label>
+                        <input type="text" class="form-control" id="eqName" placeholder="e.g. Parag Parikh Flexi Cap">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Total Invested Amount (₹)</label>
+                        <input type="number" class="form-control" id="eqInv" placeholder="e.g. 50000">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Current Value (₹)</label>
+                        <input type="number" class="form-control" id="eqVal" placeholder="e.g. 62000">
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="addEquity()">Add Holding</button>
+                </div>
+
+                <div class="card glass-card">
+                    <h3 style="margin-bottom: 16px;">Your Portfolio</h3>
+                    <div id="equityList" style="display: flex; flex-direction: column; gap: 12px;">
+                        <!-- JS injects Equity holdins here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DEBT SECTION -->
+        <div id="page-debt" class="page">
+            <div class="page-header">
+                <h1 class="page-title">Debt & Fixed Income</h1>
+                <p class="page-subtitle">Track Fixed Deposits, PPF, and outstanding loans.</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card glass-card">
+                    <h3 style="margin-bottom: 16px;">Add Fixed/Debt Instrument</h3>
+                    <div class="form-group">
+                        <label class="form-label">Instrument Type</label>
+                        <select class="form-control" id="dbType">
+                            <option value="PPF">PPF</option>
+                            <option value="Fixed Deposit">Fixed Deposit</option>
+                            <option value="Car Loan">Car Loan (Liability)</option>
+                            <option value="Home Loan">Home Loan (Liability)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Name / Bank</label>
+                        <input type="text" class="form-control" id="dbName" placeholder="e.g. HDFC FD">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Total Amount / Outstanding (₹)</label>
+                        <input type="number" class="form-control" id="dbVal" placeholder="e.g. 150000">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Interest Rate (%)</label>
+                        <input type="number" step="0.1" class="form-control" id="dbRate" placeholder="e.g. 7.1">
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="addDebt()">Save Instrument</button>
+                </div>
+
+                <div class="card glass-card">
+                    <h3 style="margin-bottom: 16px;">Your Debt & Fixed Portfolio</h3>
+                    <div id="debtList" style="display: flex; flex-direction: column; gap: 12px;">
+                        <!-- JS injects Debt holdins here -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -114,9 +215,6 @@
                     <div id="sipList" style="display: flex; flex-direction: column; gap: 12px;">
                         <!-- JS injects SIPs here -->
                     </div>
-                    <div style="margin-top: 16px; font-size: 12px; color: var(--text-secondary);">
-                        Note: In a live app, this calculates total units based on total weeks passed since start date automatically.
-                    </div>
                 </div>
             </div>
         </div>
@@ -131,11 +229,11 @@
             <div class="ai-chat-window">
                 <div class="ai-messages" id="aiMessages">
                     <div class="msg ai">
-                        Hello! I am your AI financial advisor. I noticed you're looking to automate your tracking. Ask me anything about scaling your Weekly SIPs or asset allocation!
+                        Hello! I am your AI financial advisor. I noticed you're looking to automate your tracking. Ask me anything about your Equity, Debt or Crypto allocations!
                     </div>
                 </div>
                 <div class="ai-input-area">
-                    <textarea class="ai-input" id="aiInput" placeholder="Ask about 'How much crypto should I own?'..." rows="1"></textarea>
+                    <textarea class="ai-input" id="aiInput" placeholder="Ask about 'Should I rebalance my Mutual Funds?'..." rows="1"></textarea>
                     <button class="btn btn-primary" onclick="sendMsg()">Send</button>
                 </div>
             </div>
