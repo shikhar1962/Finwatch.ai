@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FinTrack AI</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Chart.js for the Line Graph -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="app-container">
+    <!-- Desktop Sidebar -->
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">✦</div>
+            FinTrack
+        </div>
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active" data-target="dashboard">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                Dashboard
+            </a>
+            <a href="#" class="nav-item" data-target="crypto">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                Crypto & SIPs
+            </a>
+            <a href="#" class="nav-item" data-target="ai">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                Advisor
+                <span class="badge-ai">AI</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Mobile Bottom Nav -->
+    <nav class="bottom-nav">
+        <a href="#" class="bnav-item active" data-target="dashboard">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            Home
+        </a>
+        <a href="#" class="bnav-item" data-target="crypto">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            Crypto
+        </a>
+        <a href="#" class="bnav-item" data-target="ai">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+            AI Gen
+        </a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        
+        <!-- DASHBOARD PAGE -->
+        <div id="page-dashboard" class="page active">
+            <div class="page-header">
+                <h1 class="page-title">Portfolio Overview</h1>
+                <p class="page-subtitle">Welcome back! Here's how your investments are performing against the market.</p>
+            </div>
+
+            <div class="grid-3 mb-4" style="margin-bottom: 24px;">
+                <div class="stat-box glass-card">
+                    <div class="stat-label">Total Net Worth</div>
+                    <div class="stat-value" id="totalWealth">₹ 0</div>
+                </div>
+                <div class="stat-box glass-card">
+                    <div class="stat-label">Total Returns</div>
+                    <div class="stat-value text-success" id="totalReturns">+0%</div>
+                </div>
+                <div class="stat-box glass-card">
+                    <div class="stat-label">XIRR (Est)</div>
+                    <div class="stat-value text-primary">15.4%</div>
+                </div>
+            </div>
+
+            <div class="card glass-card">
+                <h3>Portfolio vs Market Index (NIFTY 50)</h3>
+                <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">Comparing simulated growth over the last 12 months.</p>
+                <div class="chart-container">
+                    <canvas id="compareChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- CRYPTO SECTION -->
+        <div id="page-crypto" class="page">
+            <div class="page-header">
+                <h1 class="page-title">Crypto & SIP Config</h1>
+                <p class="page-subtitle">Set up weekly SIPs to average out volatility.</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card glass-card">
+                    <h3 style="margin-bottom: 16px;">Add Weekly Crypto SIP</h3>
+                    <div class="form-group">
+                        <label class="form-label">Coin Name</label>
+                        <select class="form-control" id="sipCoin">
+                            <option value="Bitcoin (BTC)">Bitcoin (BTC)</option>
+                            <option value="Ethereum (ETH)">Ethereum (ETH)</option>
+                            <option value="Solana (SOL)">Solana (SOL)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Weekly SIP Amount (₹)</label>
+                        <input type="number" class="form-control" id="sipAmount" placeholder="e.g. 1000">
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="addWeeklySIP()">Start Weekly SIP</button>
+                </div>
+
+                <div class="card glass-card">
+                    <h3 style="margin-bottom: 16px;">Active Weekly SIPs</h3>
+                    <div id="sipList" style="display: flex; flex-direction: column; gap: 12px;">
+                        <!-- JS injects SIPs here -->
+                    </div>
+                    <div style="margin-top: 16px; font-size: 12px; color: var(--text-secondary);">
+                        Note: In a live app, this calculates total units based on total weeks passed since start date automatically.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI ADVISOR PAGE -->
+        <div id="page-ai" class="page">
+            <div class="page-header">
+                <h1 class="page-title">AI Finance Advisor</h1>
+                <p class="page-subtitle">Powered by Gemini. Understands your selected SIPs and portfolio.</p>
+            </div>
+
+            <div class="ai-chat-window">
+                <div class="ai-messages" id="aiMessages">
+                    <div class="msg ai">
+                        Hello! I am your AI financial advisor. I noticed you're looking to automate your tracking. Ask me anything about scaling your Weekly SIPs or asset allocation!
+                    </div>
+                </div>
+                <div class="ai-input-area">
+                    <textarea class="ai-input" id="aiInput" placeholder="Ask about 'How much crypto should I own?'..." rows="1"></textarea>
+                    <button class="btn btn-primary" onclick="sendMsg()">Send</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
